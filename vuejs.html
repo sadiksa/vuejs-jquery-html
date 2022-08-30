@@ -23,7 +23,7 @@
     <div class="container text-center">
       <div id="app">
         <div class="row">
-          <div class="col-4 bg-danger">A {{message}}</div>
+          <div class="col-4 bg-danger">A {{count}}</div>
           <div class="col-8">
             <img
               class="img-fluid"
@@ -69,6 +69,7 @@
           <div class="col-8">
             <img
               class="img-fluid"
+              :class="{ 'bg-dark': classBool }"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png"
               alt="Vuejs"
             />
@@ -96,14 +97,31 @@
     </div>
   </body>
   <script>
-    const { createApp } = Vue
-  
+    const { createApp } = Vue;
+
     createApp({
       data() {
         return {
-          message: 'Hello Vue!'
-        }
-      }
-    }).mount('#app')
+          message: "Hello Vue!",
+          count: 0,
+          classBool: false,
+        };
+      },
+      methods: {
+        test() {
+          let testCount = 100000;
+          let startTime = Date.now();
+          for (let index = 0; index < testCount; index++) {
+            this.$data.count = index;
+            this.$data.classBool = !this.$data.classBool;
+          }
+          let endTime = Date.now();
+          console.log("Result: ", endTime - startTime);
+        },
+      },
+      mounted() {
+        this.test();
+      },
+    }).mount("#app");
   </script>
 </html>

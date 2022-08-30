@@ -68,6 +68,7 @@
         <div class="col-8">
           <img
             class="img-fluid"
+            id="picture"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png"
             alt="Vuejs"
           />
@@ -93,9 +94,22 @@
       </div>
     </div>
     <script>
+      function Test(){
+        let testCount = 1000000
+        let element$ = $("#enterance")
+        let picture$ = $("#picture")
+        let startTime = Date.now()
+        for (let index = 0; index < testCount; index++) {
+          element$.html(index)
+          picture$.toggleClass("bg-dark")
+        }
+        let endTime = Date.now()
+        console.log("Result: ", endTime - startTime);
+      }
       $(document).ready(function () {
-        $("#enterance").html($("#enterance").html() + " Jquery works")
+        Test()
       });
+      
     </script>
   </body>
 </html>
